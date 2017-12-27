@@ -3,6 +3,9 @@
 
 enum TokenType
 {
+	BINARY,
+	OCTAL,
+	HEX,
 	INTEGER,
 	FLOAT,
 	OPERATOR,

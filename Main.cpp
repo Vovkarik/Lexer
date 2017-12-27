@@ -21,6 +21,15 @@ int main()
 			case INTEGER:
 				std::cout << "INTEGER->" << elem.getText() << std::endl;
 				break;
+			case BINARY:
+				std::cout << "BINARY->" << elem.getText() << std::endl;
+				break;
+			case OCTAL:
+				std::cout << "OCTAL->" << elem.getText() << std::endl;
+				break;
+			case HEX:
+				std::cout << "HEX->" << elem.getText() << std::endl;
+				break;
 			case FLOAT:
 				std::cout << "FLOAT->" << elem.getText() << std::endl;
 				break;

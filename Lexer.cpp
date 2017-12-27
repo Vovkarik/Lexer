@@ -63,13 +63,94 @@ void Lexer::tokenizeFloat(std::string buffer)
 	}
 }
 
+void Lexer::tokenizeBinary()
+{
+	std::string BINARY_CHARS = "01";
+	std::string buffer = "0";
+	char current = peek(0);
+	buffer += current;
+	current = next();
+	while (BINARY_CHARS.find(current) != std::string::npos)
+	{
+		buffer += current;
+		current = next();
+	}
+	if ((OPERATOR_CHARS.find(current) == std::string::npos) && (SEPARATOR_CHARS.find(current) == std::string::npos) && (current != ' ') && (current != '\0'))
+	{
+		tokenizeError(buffer);
+	}
+	else
+	{
+		addToken(BINARY, buffer);
+	}
+}
+
+
+void Lexer::tokenizeOctal()
+{
+	std::string OTAL_CHARS = "01234567";
+	std::string buffer = "0";
+	char current = peek(0);
+	buffer += current;
+	current = next();
+	while (OTAL_CHARS.find(current) != std::string::npos)
+	{
+		buffer += current;
+		current = next();
+	}
+	if ((OPERATOR_CHARS.find(current) == std::string::npos) && (SEPARATOR_CHARS.find(current) == std::string::npos) && (current != ' ') && (current != '\0'))
+	{
+		tokenizeError(buffer);
+	}
+	else
+	{
+		addToken(OCTAL, buffer);
+	}
+}
+
+void Lexer::tokenizeHex()
+{
+	std::string HEX_CHARS = "0123456789ABDEF";
+	std::string buffer = "0";
+	char current = peek(0);
+	buffer += current;
+	current = next();
+	while (HEX_CHARS.find(current) != std::string::npos)
+	{
+		buffer += current;
+		current = next();
+	}
+	if ((OPERATOR_CHARS.find(current) == std::string::npos) && (SEPARATOR_CHARS.find(current) == std::string::npos) && (current != ' ') && (current != '\0'))
+	{
+		tokenizeError(buffer);
+	}
+	else
+	{
+		addToken(HEX, buffer);
+	}
+}
+
 void Lexer::tokenizeInteger()
 {
 	std::string buffer;
 	char current = peek(0);
-	/*buffer += current;
+	buffer += current;
 	current = next();
-	if (current == 'b')*/
+	if (buffer == "0" && current == 'b')
+	{
+		tokenizeBinary();
+		return;
+	}
+	if (buffer == "0" && current == 'o')
+	{
+		tokenizeOctal();
+		return;
+	}
+	if (buffer == "0" && current == 'x')
+	{
+		tokenizeHex();
+		return;
+	}
 	while (isdigit(current))
 	{
 		buffer += current;

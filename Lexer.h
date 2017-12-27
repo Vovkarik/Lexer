@@ -21,6 +21,9 @@ private:
 	std::string SEPARATOR_CHARS = ";,:'(){}[]";
 	std::vector<std::string> KEY_WORD = {"IF", "WHILE", "THEN", "ELSE", "FOR", "RETURN"};
 	void tokenizeInteger();
+	void tokenizeBinary();
+	void tokenizeOctal();
+	void tokenizeHex();
 	void tokenizeFloat(std::string buffer);
 	void tokenizeOperator();
 	void tokenizeSeparator();
